@@ -42,6 +42,7 @@ List<Employee>ls=SqlQueries.fetchData();
         <th>Name</th>
         <th>City</th>
         <th>Phone</th>
+        <th>Update</th>
         <th>Delete</th>
     </tr>
     <%
@@ -52,6 +53,13 @@ List<Employee>ls=SqlQueries.fetchData();
         <td><%= emp.getName() %></td>
         <td><%= emp.getCity() %></td>
         <td><%= emp.getPhone() %></td>
+        <td> 
+        	<form action="HomeSevelet" method="post">
+        		<input type="hidden" name="opr" value="update">
+        		<input type=hidden name="id" value=<%=emp.getId() %>>
+        		<button type="submit">Update</button>
+        	</form>
+        </td>
         <td> 
         	<form action="HomeSevelet" method="post">
         		<input type="hidden" name="opr" value="delete">

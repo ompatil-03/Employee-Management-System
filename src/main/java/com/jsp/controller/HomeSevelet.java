@@ -75,6 +75,27 @@ public class HomeSevelet extends HttpServlet {
 				pw.print("Employee NOT deleted !");
 			}
 					
+		}else if(opr.equals("update")) {
+			RequestDispatcher rs=request.getRequestDispatcher("update.jsp");
+			rs.include(request, response);
+		}else if(opr.equals("edit")) {
+			int id=Integer.parseInt(request.getParameter("id"));
+			String name=request.getParameter("name");
+			String city=request.getParameter("city");
+			String phone=request.getParameter("phone");
+			Employee emp=new Employee();
+			emp.setId(id);
+			emp.setName(name);
+			emp.setCity(city);
+			emp.setPhone(phone);
+			int status=SqlQueries.editEmp(emp);
+			if(status!=0) {
+				pw.print("<h1>Employee updated Succesfully !</h1>");
+				RequestDispatcher rs=request.getRequestDispatcher("FetchData.jsp");
+				rs.forward(request, response);
+			}else {
+				pw.print("Employee NOT updated !");
+			}
 		}
 	}
 

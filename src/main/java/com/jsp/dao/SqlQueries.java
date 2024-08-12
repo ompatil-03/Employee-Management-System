@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 import com.jsp.bean.Employee;
+import com.mysql.cj.protocol.Resultset;
 
 public class SqlQueries {
 	public  static int insert(Employee emp) {
@@ -72,10 +73,44 @@ public class SqlQueries {
 		return status;
 	}
 	
+	public static Employee updateEmp(int id) {
+		Connection con=GetConnection.returnConnection();
+		
+		String sql="Select * from emp where id=?;";
+		Employee emp=new Employee();
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs=ps.executeQuery();
+		
+			while(rs.next()) {
+				emp.setId(rs.getInt(1));
+				emp.setName(rs.getString(2));
+				emp.setCity(rs.getString(3));
+				emp.setPhone(rs.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return emp;
+	}
 	
-	
-	
-	
+	public static int editEmp(Employee emp) {
+		Connection con=GetConnection.returnConnection();
+		int status=0;
+		String sql="update emp set name=?,city=?,phone=? where id=?";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setString(1,emp.getName());
+			ps.setString(2,emp.getCity());
+			ps.setString(3,emp.getPhone());
+			ps.setInt(4, emp.getId());
+			status=ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
 	
 	
 	
