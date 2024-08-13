@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 import com.jsp.bean.Employee;
+import com.jsp.bean.User;
 import com.mysql.cj.protocol.Resultset;
 
 public class SqlQueries {
@@ -112,7 +113,51 @@ public class SqlQueries {
 		return status;
 	}
 	
+	public static boolean varify(String s1,String s2) {
+		Connection con=GetConnection.returnConnection();
+		boolean b=false;
+		String sql="select * from users where username=?";
+		
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setString(1, s1);
+			User user=new User();
+			ResultSet rs= ps.executeQuery();
+			while(rs.next()) {
+				user.setName(rs.getString(1));
+				user.setEmail(rs.getString(2));
+				user.setUsername(rs.getString(3));
+				user.setPassword(rs.getString(4));
+			}
+			
+			if(user.getPassword().equals(s2)) {
+				b=true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return b;
+	}
 	
+	public static int signUp(User user) {
+		Connection con=GetConnection.returnConnection();
+		
+		String sql="insert into users values(?,?,?,?);";
+		int status=0;
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setString(1, user.getName());
+			ps.setString(2, user.getEmail());
+			ps.setString(3, user.getUsername());
+			ps.setString(4, user.getPassword());
+			status=ps.executeUpdate();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
 	
 	
 	

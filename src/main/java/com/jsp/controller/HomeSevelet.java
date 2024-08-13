@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jsp.bean.Employee;
+import com.jsp.bean.User;
 import com.jsp.dao.SqlQueries;
 
 /**
@@ -95,6 +96,33 @@ public class HomeSevelet extends HttpServlet {
 				rs.forward(request, response);
 			}else {
 				pw.print("Employee NOT updated !");
+			}
+		}else if(opr.equals("varify")) {
+			String username=request.getParameter("username");
+			String password=request.getParameter("password");
+			boolean b=SqlQueries.varify(username, password);
+			if(b) {
+				RequestDispatcher rs=request.getRequestDispatcher("FetchData.jsp");
+				rs.forward(request, response);
+			}else {
+				pw.print("Something Went Wrong !");
+			}
+		}else if(opr.equals("signup")) {
+			String name=request.getParameter("name");
+			String email=request.getParameter("email");
+			String username=request.getParameter("username");
+			String password=request.getParameter("password");
+			User user=new User();
+			user.setName(name);
+			user.setEmail(email);
+			user.setUsername(username);
+			user.setPassword(password);
+			int status=SqlQueries.signUp(user);
+			if(status!=0) {
+				RequestDispatcher rs=request.getRequestDispatcher("Login.jsp");
+				rs.forward(request, response);
+			}else {
+				pw.print("SignUp Failed !");
 			}
 		}
 	}

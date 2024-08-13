@@ -3,11 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Sign Up</title>
+    <title>Insert</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,87 +17,89 @@
         }
         .container {
             background-color: #fff;
-            padding: 20px 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
+            text-align: center;
         }
         .container h2 {
-            text-align: center;
+            font-size: 24px;
+            color: #202124;
             margin-bottom: 20px;
-            color: #333;
         }
         .form-group {
             margin-bottom: 15px;
+            text-align: left;
         }
         .form-group label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+            color: #5f6368;
         }
         .form-group input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
             font-size: 14px;
             box-sizing: border-box;
         }
         .form-group input:focus {
-            border-color: #007bff;
+            border-color: #1a73e8;
             outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            box-shadow: 0 0 3px rgba(26, 115, 232, 0.5);
+        }
+        .btn-submit, .btn-view {
+            width: 100%;
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         .btn-submit {
-            width: 100%;
-            padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #1a73e8;
             color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-bottom: 10px;
+            margin-top: 20px;
         }
         .btn-submit:hover {
-            background-color: #0056b3;
+            background-color: #1558b0;
         }
         .btn-view {
-            width: 100%;
-            padding: 10px 20px;
-            background-color: #28a745;
+            background-color: #34a853;
             color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
+            margin-top: 10px;
         }
         .btn-view:hover {
-            background-color: #218838;
+            background-color: #2b7b44;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Sign Up</h2>
+        <h2>Add New Employee</h2>
         <form action="HomeSevelet" method="post">
             <input type="hidden" name="opr" value="insert">
             <div class="form-group">
-                <label for="id">ID:</label>
+                <label for="id">ID</label>
                 <input type="number" id="id" name="id" placeholder="Enter your ID" required>
             </div>
             <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Enter your name" required>
             </div>
             <div class="form-group">
-                <label for="city">City:</label>
+                <label for="city">City</label>
                 <input type="text" id="city" name="city" placeholder="Enter your city" required>
             </div>
             <div class="form-group">
-                <label for="phone">Phone No.:</label>
+                <label for="phone">Phone No.</label>
                 <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
             </div>
             <button type="submit" class="btn-submit">Submit</button>
